@@ -5,7 +5,7 @@ export const WeeklyExpensesContext = createContext<any | null>(null)
 
 export const WeeklyExpensesProvider = ({children}: any) => {
   const [todayExpenses, setTodayExpenses] = useState<number>(557.46)
-  const [totalBalance, setTotalBalance] = useState<number>(3326)
+  const [totalBalance, setTotalBalance] = useState<number>(0)
   const [percentageDiff, setPercentageDiff] = useState<number>(2.4)
   const week = {
     monday: 200,
