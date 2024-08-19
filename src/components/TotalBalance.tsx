@@ -9,7 +9,7 @@ export const TotalBalance = () => {
   useTotalBalance()
 
   return (
-    <section className='bg-[#ec765c] rounded-lg p-4 text-white items-center flex flex-col-reverse gap-y-2 md:flex-row md:justify-between md:gap-y-0'>
+    <section className='bg-[#ec765c] rounded-lg px-6 py-8 text-white items-center flex flex-col-reverse gap-y-2 md:flex-row md:justify-between md:gap-y-0'>
       <div className='flex flex-col'>
         <p>Balanç total</p>
         <p className='text-2xl font-bold'>{totalBalance} €</p>

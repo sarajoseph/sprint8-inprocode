@@ -10,26 +10,25 @@ ChartJS.register(
   Legend
 )
 
-export const useGraph = (dataGraph: number[]) => {
+export const useGraph = (weekData: number[], currentDay: number) => {
   const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   const barBgColor = 'rgba(236, 118, 92, 1)'
   const currentBarBgColor = 'rgba(115, 182, 190, 1)'
   const greyColor = 'rgba(195, 194, 190, 1)'
+  const backgroundColors = []
+  for (let i = 1; i <= 7; i++) {
+    backgroundColors[i] = barBgColor;
+  }
+  backgroundColors[currentDay] = currentBarBgColor
+  backgroundColors.shift()
+
   const chartData = {
     labels: weekDays,
     datasets: [
       {
         label: 'Expenses',
-        data: dataGraph,
-        backgroundColor: [
-          barBgColor,
-          barBgColor,
-          barBgColor,
-          barBgColor,
-          barBgColor,
-          barBgColor,
-          currentBarBgColor
-        ],
+        data: weekData,
+        backgroundColor: backgroundColors,
         borderRadius: 5,
       }
     ]
@@ -44,6 +43,29 @@ export const useGraph = (dataGraph: number[]) => {
       legend: {
         display: false,
       },
+      tooltip: {
+        callbacks: {
+            title: function(context: any) {
+              const currentLabel = context[0].label
+              switch(currentLabel) {
+                case 'Mon':
+                  return 'Monday'
+                case 'Tue':
+                  return 'Tuesday'
+                case 'Wed':
+                  return 'Wednesday'
+                case 'Thu':
+                  return 'Thursday'
+                case 'Fri':
+                  return 'Friday'
+                case 'Sat':
+                  return 'Saturday'
+                case 'Sun':
+                  return 'Sunday'
+              }
+            }
+        }
+    }
     },
     scales: {
       x: {

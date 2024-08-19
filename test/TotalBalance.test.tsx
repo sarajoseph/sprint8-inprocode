@@ -1,11 +1,14 @@
 import React from 'react'
 import { TotalBalance } from '../src/components/TotalBalance'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { WeeklyExpensesContext } from '../src/context/WeeklyExpensesContext'
 
+const mockSetTotalBalance = vi.fn()
 const mockContextValue  = {
-  totalBalance: 3326
+  totalBalance: 280,
+  setTotalBalance: mockSetTotalBalance,
+  weekData: [10, 20, 30, 40, 50, 60, 70]
 }
 
 // REQUIRED: Import React to the component is required for testing
@@ -18,9 +21,10 @@ describe('TotalBalance', () => {
     )
 
     // Comprueba que total balance esté en el documento y que sea numérico
+    expect(screen.getByText(mockContextValue.totalBalance+' €')).not.toBeNull()
     expect(typeof mockContextValue.totalBalance).toBe('number')
     expect(!isNaN(mockContextValue.totalBalance)).toBe(true)
-    expect(screen.getByText(mockContextValue.totalBalance+' €')).not.toBeNull()
+    expect(mockContextValue.totalBalance).toBe(mockContextValue.totalBalance)
   })
 
   it('renders LeftArrow and RightArrow icons', () => {

@@ -16,7 +16,7 @@ describe('useTotalBalance', () => {
     const mockSetTotalBalance = vi.fn()
     const mockContextValue = {
       setTotalBalance: mockSetTotalBalance,
-      week: { Monday: 10, Tuesday: 20, Wednesday: 30, Thursday: 40, Friday: 50, Saturday: 60, Sunday: 70 }
+      weekData: [10, 20, 30, 40, 50, 60, 70]
     }
 
     // Renderiza el hook dentro del contexto mock

@@ -558,10 +558,6 @@ video {
   display: flex;
 }
 
-.grid {
-  display: grid;
-}
-
 .size-5 {
   width: 1.25rem;
   height: 1.25rem;
@@ -616,24 +612,12 @@ video {
   row-gap: 1rem;
 }
 
-.gap-y-5 {
-  row-gap: 1.25rem;
-}
-
 .gap-y-6 {
   row-gap: 1.5rem;
 }
 
 .rounded-lg {
   border-radius: 0.5rem;
-}
-
-.border {
-  border-width: 1px;
-}
-
-.border-t {
-  border-top-width: 1px;
 }
 
 .border-t-2 {
@@ -659,8 +643,22 @@ video {
   padding: 1rem;
 }
 
-.pt-2 {
-  padding-top: 0.5rem;
+.p-6 {
+  padding: 1.5rem;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .pt-6 {
