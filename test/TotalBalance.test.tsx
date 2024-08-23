@@ -11,6 +11,13 @@ const mockContextValue  = {
   weekData: [10, 20, 30, 40, 50, 60, 70]
 }
 
+// Mock del módulo 'react-i18next'
+vi.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (str: string) => str, // Retorna la clave de traducción directamente
+  }),
+}))
+
 // REQUIRED: Import React to the component is required for testing
 describe('TotalBalance', () => {
   it('renders total balance and verifies it is numeric', () => {
@@ -36,5 +43,14 @@ describe('TotalBalance', () => {
 
     expect(screen.getByLabelText('left-arrow-icon')).not.toBeNull()
     expect(screen.getByLabelText('right-arrow-icon')).not.toBeNull()
+  })
+
+  it('should render the component with correct translations', () => {
+    render(
+      <WeeklyExpensesContext.Provider value={mockContextValue}>
+        <TotalBalance />
+      </WeeklyExpensesContext.Provider>
+    )
+    expect(screen.getByText('total_balance')).not.toBeNull()
   })
 })

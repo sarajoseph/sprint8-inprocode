@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js'
+import { useTranslation } from 'react-i18next'
 
 ChartJS.register(
   CategoryScale,
@@ -11,13 +12,14 @@ ChartJS.register(
 )
 
 export const useGraph = (weekData: number[], currentDay: number) => {
-  const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  const { t } = useTranslation()
+  const weekDays = [t('short_monday'), t('short_tuesday'), t('short_wednesday'), t('short_thursday'), t('short_friday'), t('short_saturday'), t('short_sunday')]
   const barBgColor = 'rgba(236, 118, 92, 1)'
   const currentBarBgColor = 'rgba(115, 182, 190, 1)'
   const greyColor = 'rgba(195, 194, 190, 1)'
   const backgroundColors = []
   for (let i = 1; i <= 7; i++) {
-    backgroundColors[i] = barBgColor;
+    backgroundColors[i] = barBgColor
   }
   backgroundColors[currentDay] = currentBarBgColor
   backgroundColors.shift()
@@ -26,7 +28,7 @@ export const useGraph = (weekData: number[], currentDay: number) => {
     labels: weekDays,
     datasets: [
       {
-        label: 'Expenses',
+        label: t('chart.datasets_label'),
         data: weekData,
         backgroundColor: backgroundColors,
         borderRadius: 5,
@@ -48,20 +50,20 @@ export const useGraph = (weekData: number[], currentDay: number) => {
             title: function(context: any) {
               const currentLabel = context[0].label
               switch(currentLabel) {
-                case 'Mon':
-                  return 'Monday'
-                case 'Tue':
-                  return 'Tuesday'
-                case 'Wed':
-                  return 'Wednesday'
-                case 'Thu':
-                  return 'Thursday'
-                case 'Fri':
-                  return 'Friday'
-                case 'Sat':
-                  return 'Saturday'
-                case 'Sun':
-                  return 'Sunday'
+                case t('short_monday'):
+                  return t('monday')
+                case t('short_tuesday'):
+                  return t('tuesday')
+                case t('short_wednesday'):
+                  return t('wednesday')
+                case t('short_thursday'):
+                  return t('thursday')
+                case t('short_friday'):
+                  return t('friday')
+                case t('short_saturday'):
+                  return t('saturday')
+                case t('short_sunday'):
+                  return t('sunday')
               }
             }
         }
