@@ -11,18 +11,21 @@ ChartJS.register(
   Legend
 )
 
-export const useGraph = (weekData: number[], currentDay: number) => {
+export const useGraph = (weekData: number[], currentDay: number | null) => {
   const { t } = useTranslation()
   const weekDays = [t('short_monday'), t('short_tuesday'), t('short_wednesday'), t('short_thursday'), t('short_friday'), t('short_saturday'), t('short_sunday')]
   const barBgColor = 'rgba(236, 118, 92, 1)'
   const currentBarBgColor = 'rgba(115, 182, 190, 1)'
   const greyColor = 'rgba(195, 194, 190, 1)'
   const backgroundColors = []
-  for (let i = 1; i <= 7; i++) {
+
+  for (let i = 0; i <= 6; i++) {
     backgroundColors[i] = barBgColor
   }
-  backgroundColors[currentDay] = currentBarBgColor
-  backgroundColors.shift()
+
+  if (currentDay !== null) {
+    backgroundColors[currentDay] = currentBarBgColor
+  }
 
   const chartData = {
     labels: weekDays,

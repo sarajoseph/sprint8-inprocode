@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import { useWeek } from '../src/hooks/useWeek'
+import { useWeekData } from '../src/hooks/useWeekData'
 
-describe('useWeek Hook', () => {
+describe('useWeekData Hook', () => {
   it('should return an array of numbers', () => {
-    const weekData = useWeek()
+    const weekData = useWeekData()
     expect(weekData).not.toBeNull()
     expect(typeof weekData[1]).toBe('number')
     expect(typeof weekData[2]).toBe('number')
@@ -16,7 +16,7 @@ describe('useWeek Hook', () => {
   })
 
   it('should have undefined at index 0', () => {
-    const weekData = useWeek()
+    const weekData = useWeekData()
     expect(weekData[0]).toBeUndefined()
   })
 })

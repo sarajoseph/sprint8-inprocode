@@ -1,11 +1,33 @@
+import { useEffect, useContext } from 'react'
+import { weeksData } from '../global/constants'
+import { WeeklyExpensesContext } from '../context/WeeklyExpensesContext'
+
 export const useWeek = () => {
-  const weekData = []
-  weekData[1] = 200
-  weekData[2] = 59
-  weekData[3] = 7.4
-  weekData[4] = 83
-  weekData[5] = 273.23
-  weekData[6] = 437.84
-  weekData[7] = 350.05
-  return weekData
+  const {
+    setWeekData,
+    currentWeek,
+    setCurrentWeek,
+    maxPrevWeek
+  } = useContext(WeeklyExpensesContext)
+
+  useEffect(() => {
+    setWeekData(weeksData[currentWeek])
+  }, [currentWeek, setWeekData])
+
+  const displayPrevWeek = () => {
+    if (currentWeek < maxPrevWeek) {
+      setCurrentWeek((prev: number) => prev + 1)
+    }
+  }
+
+  const displayNextWeek = () => {
+    if (currentWeek > 0) {
+      setCurrentWeek((prev: number) => prev - 1)
+    }
+  }
+
+  return {
+    displayPrevWeek,
+    displayNextWeek
+  }
 }

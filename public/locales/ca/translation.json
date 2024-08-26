@@ -4,6 +4,9 @@
   "compared_to_yesterday": "respecte a ahir",
   "chart": {
     "title": "Despeses - Última setmana",
+    "title_prev_week1": "Despeses - Fa ",
+    "title_prev_week2_singular": " setmana",
+    "title_prev_week2_plural": " setmanes",
     "datasets_label": "Despeses"
   },
   "short_monday": "Dl",

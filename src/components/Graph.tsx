@@ -4,8 +4,9 @@ import { useGraph } from '../hooks/useGraph'
 import { useContext } from 'react'
 
 export const Graph = () => {
-  const { weekData, currentDay } = useContext(WeeklyExpensesContext)
-  const { chartData, options } = useGraph(weekData, currentDay)
+  const { weekData, currentDay, currentWeek } = useContext(WeeklyExpensesContext)
+  const day = currentWeek === 0 ? currentDay : null
+  const { chartData, options } = useGraph(weekData, day)
   return (
     <Bar data={chartData} options={options} />
   )

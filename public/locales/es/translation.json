@@ -4,6 +4,9 @@
   "compared_to_yesterday": "respecto a ayer",
   "chart": {
     "title": "Gastos - Última semana",
+    "title_prev_week1": "Gastos - Hace ",
+    "title_prev_week2_singular": " semana",
+    "title_prev_week2_plural": " semanas",
     "datasets_label": "Gastos"
   },
   "short_monday": "Lun",
