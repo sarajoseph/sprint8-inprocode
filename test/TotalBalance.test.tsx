@@ -1,20 +1,40 @@
 import React from 'react'
 import { TotalBalance } from '../src/components/TotalBalance'
 import { describe, expect, it, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { WeeklyExpensesContext } from '../src/context/WeeklyExpensesContext'
 
 const mockSetTotalBalance = vi.fn()
 const mockContextValue  = {
   totalBalance: 280,
   setTotalBalance: mockSetTotalBalance,
-  weekData: [10, 20, 30, 40, 50, 60, 70]
+  weekData: [10, 20, 30, 40, 50, 60, 70],
+  setWeekData: () => {},
+  currentDay: 0,
+  setCurrentDay: () => {},
+  currentWeek: 0,
+  setCurrentWeek: () => {},
+  todayExpenses: 0,
+  setTodayExpenses: () => {},
+  percentageDiff: '0',
+  setPercentageDiff: () => {},
+  maxPrevWeek: 0
 }
 
 // Mock del módulo 'react-i18next'
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (str: string) => str, // Retorna la clave de traducción directamente
+  }),
+}))
+
+// Mock the `useWeek` hook
+const mockDisplayPrevWeek = vi.fn()
+const mockDisplayNextWeek = vi.fn()
+vi.mock('../src/hooks/useWeek', () => ({
+  useWeek: () => ({
+    displayPrevWeek: mockDisplayPrevWeek,
+    displayNextWeek: mockDisplayNextWeek,
   }),
 }))
 
@@ -43,6 +63,14 @@ describe('TotalBalance', () => {
 
     expect(screen.getByLabelText('left-arrow-icon')).not.toBeNull()
     expect(screen.getByLabelText('right-arrow-icon')).not.toBeNull()
+
+    // Click on the left arrow button and check if the function is called
+    fireEvent.click(screen.getByLabelText('left-arrow-icon'))
+    expect(mockDisplayPrevWeek).toHaveBeenCalled()
+
+    // Click on the right arrow button and check if the function is called
+    fireEvent.click(screen.getByLabelText('right-arrow-icon'))
+    expect(mockDisplayNextWeek).toHaveBeenCalled()
   })
 
   it('should render the component with correct translations', () => {

@@ -1,32 +1,14 @@
-import React from 'react'
 import { useTotalBalance } from '../src/hooks/useTotalBalance'
-import { describe, expect, it, vi } from 'vitest'
-import { render } from '@testing-library/react'
-import { WeeklyExpensesContext } from '../src/context/WeeklyExpensesContext'
-
-// Componente de prueba que usa el hook
-const TestComponent = () => {
-  useTotalBalance()
-  return <div>Test</div>
-}
+import { describe, expect, it } from 'vitest'
 
 describe('useTotalBalance', () => {
-  it('should calculate the sum of weekly expenses and call setTotalBalance', () => {
-    // Mock del contexto
-    const mockSetTotalBalance = vi.fn()
-    const mockContextValue = {
-      setTotalBalance: mockSetTotalBalance,
-      weekData: [10, 20, 30, 40, 50, 60, 70]
-    }
+  it('should return the correct total balance for a given weekData array', () => {
+    const weekData1 = [10, 20, 30, 40, 50, 60, 70]
+    const weekData2 = [15, 25, 35, 45, 55, 65, 75]
+    const weekData3: number[] = []
 
-    // Renderiza el hook dentro del contexto mock
-    render(
-      <WeeklyExpensesContext.Provider value={mockContextValue}>
-        <TestComponent />
-      </WeeklyExpensesContext.Provider>
-    )
-
-    // Verifica que setTotalBalance se haya llamado con el valor correcto
-    expect(mockSetTotalBalance).toHaveBeenCalledWith(280)
+    expect(useTotalBalance(weekData1)).toBe(280)
+    expect(useTotalBalance(weekData2)).toBe(315)
+    expect(useTotalBalance(weekData3)).toBe(0)
   })
 })
